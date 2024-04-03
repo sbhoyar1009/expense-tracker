@@ -19,7 +19,11 @@ export default function Home() {
             <Balance />
             {/* <IncomeExpenses /> */}
             <TransactionList />
-            <AddTransaction />
+            {/* <AddTransaction /> */}
+
+          <div class="action_btn">
+          <a href='/add-transaction'>  <button className="btn">Add Transaction</button></a>
+          </div>
           </div>
 
 </>

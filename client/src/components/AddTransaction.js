@@ -5,11 +5,11 @@ export const AddTransaction = () => {
   const [text, setText] = useState('');
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState('');
-  const [date,setDate] = useState()
+  const [date, setDate] = useState()
   let [credit, setCredit] = useState(true);
-  const [currency,setCurrency] = useState('INR')
+  const [currency, setCurrency] = useState('INR')
   const categories = ["Food", "Investment", "Groceries", "Study Material", "Clothes", "Travelling", "Subscriptions", "Others and miscellous"]
-const currencies = ["INR","USD"]
+  const currencies = ["INR", "USD","EUR"]
 
   const onSubmit = e => {
     e.preventDefault();
@@ -21,14 +21,17 @@ const currencies = ["INR","USD"]
         "category": category,
         "recipient": text,
         "amount": parseInt(amount) * -1,
-        "date" : date
+        "date": date,
+        "currency" : currency
+
       }
     } else {
       data = {
         "category": category,
         "recipient": text,
         "amount": parseInt(amount),
-        "date" : date
+        "date": date,
+        "currency" : currency
       }
     }
     console.log(data)
@@ -36,40 +39,49 @@ const currencies = ["INR","USD"]
     window.location.reload()
   }
 
+
   return (
-    <>
-      <h3>Add new transaction</h3>
+    <div className='container'>
+
+      <a href='/'>   <h3>Go to home</h3> </a>
+      <h3> Add new transaction</h3>
       <form onSubmit={onSubmit}>
         <div className="form-control">
-          <label htmlFor="text">Text</label>
-          <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter text..." />
+          <label htmlFor="text">Description</label>
+          <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Descripe the expense" />
         </div>
         <div className="form-control">
-           <label htmlFor="text">Category</label>
-          {/* <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Enter category..." />  */}
-        <select onChange={(e)=>setCategory(e.target.value)}>
-          {categories.map((cat)=>{
-          return ( <option value={cat}>{cat}</option>)
-          })}
-        </select>
+          <label htmlFor="text">Category</label>
+          <select onChange={(e) => setCategory(e.target.value)}>
+            {categories.map((cat) => {
+              return (<option value={cat}>{cat}</option>)
+            })}
+          </select>
         </div>
+  
         <div className="form-control amount">
           <label htmlFor="amount"
           >Amount <br />
             {/* (negative - expense, positive - income) */}
           </label>
           <br />
-          <div style={{"display": "inline-block"}}>
-          <select onChange={(e)=>setCurrency(e.target.value)}>
-          {currencies.map((cat)=>{
-          return ( <option value={cat}>{cat}</option>)
-          })}
-        </select>
+          <div style={{ "display": "inline-block" }}>
+            <select onChange={(e)=>    setCurrency(e.target.value)}>
+              {currencies.map((cat) => {
+                return (<option value={cat}>{cat}</option>)
+              })}
+            </select>
+          </div>
+          < div style={{ "display": "inline-block", "margin": "0.5rem", "width": "18.26rem" }}>
+            <input type="number" value={amount} onChange={e=>setAmount(e.target.value)} placeholder="Enter amount..." />
+          </div>
         </div>
-       < div style={{"display": "inline-block","margin" : "0.5rem","width" : "18.26rem"}}>
-          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount..." />
-       </div>
-        </div>
+        <div className="form-control">
+
+<label htmlFor="date"> Add reciepts if you want
+</label>
+<input type="file"  />
+</div>
         <br />
         <div className="form-control">
 
@@ -77,6 +89,7 @@ const currencies = ["INR","USD"]
           </label>
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="Enter date..." />
         </div>
+  
         <div class="buttons">
 
           <div class="action_btn">
@@ -85,6 +98,6 @@ const currencies = ["INR","USD"]
           </div>
         </div>
       </form>
-    </>
+    </div>
   )
 }

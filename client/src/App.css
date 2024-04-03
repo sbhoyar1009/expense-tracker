@@ -53,6 +53,7 @@ td,th{
 
 .tableDiv{
   display: block !important;
+  padding: 1rem;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
@@ -142,6 +143,7 @@ input[type='text'],
 input[type='password'],
 input[type='email'],
 input[type='date'],
+input[type='file'],
 select,
 input[type='number'] {
   border: 1px solid #dedede;
