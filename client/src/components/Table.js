@@ -27,12 +27,11 @@ export default function Table() {
     }, [])
     return (
         <>
-            <h2>Expense report</h2>
+            <h3>Expense report</h3>
             <div class="tableDiv">
-            {console.log(expense)}
                 <DataTable value={expense} showGridlines sortMode="multiple" >
                             <Column field="recipient" header="Name " sortable filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }}></Column>
-                            <Column field="amount" header="Amount" dataType="numeric" sortable  filter filterPlaceholder="Search by name" style={{ minWidth: '12rem'}}></Column>
+                            <Column field="amount" header="Amount" dataType="numeric"    filterPlaceholder="Search by name" style={{ minWidth: '12rem'}}></Column>
                             <Column field="category" header="Category" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }}></Column>
                             <Column field="date" header="Date" dataType="date" sortable filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }} ></Column>
                 </DataTable>

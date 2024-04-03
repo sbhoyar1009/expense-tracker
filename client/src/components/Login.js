@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-
+import bcrypt from "bcryptjs";
 import '../App.css';
+import axios from "axios"
 
 export default function Login() {
 
-    const onSubmit=()=>{}
+    const onSubmit=(e)=>{
+      e.preventDefault()
+      axios.post("http://localhost:8000/users/verify",{
+        username : text,
+        password : password
+      })
+    }
     const [text, setText] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

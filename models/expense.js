@@ -4,7 +4,8 @@ const ExpenseSchema = new mongoose.Schema({
     category: { type: String },
     date: { type: Date,default:Date.now() },
     recipient: { type: String },
-    amount: { type: Number }
+    amount: { type: Number },
+    currency : {type : String}
 
 })
 
