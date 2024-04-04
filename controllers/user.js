@@ -35,26 +35,27 @@ exports.verifyUser = async (req, res, next) => {
     try {
         const username = req.body?.username
         const password = req.body?.password
-        console.log(password)
         const user = await User.findOne({ username: username })
-
-        const areCredsCorrect = await bcrypt.compare(password, user.password)
         if (user === null) {
             return res.status(201).json({
                 message: "User not present"
             });
         }
-        if (areCredsCorrect === null) {
-            return res.status(201).json({
+        const areCredsCorrect = await bcrypt.compare(password, user.password)
+        console.log(areCredsCorrect)
+
+        if (!areCredsCorrect) {
+            return res.status(203).json({
                 message: "Invalid Credentials"
             });
         }
+        console.log()
         const token = jwt.sign({
             userId: user._id,
             username: user.username
         }, process.env.SECRET, { expiresIn: '24h' })
 
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
             data: {username,token}
         });

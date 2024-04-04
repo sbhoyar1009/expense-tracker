@@ -10,7 +10,8 @@ import "primereact/resources/primereact.min.css"
 export default function Table() {
     const [expense, setExpense] = useState([])
     useEffect(() => {
-        axios.get("http://localhost:8000/expenses").then((data) => {
+        const token = localStorage.getItem('token')
+        axios.get("http://localhost:8000/expenses",{headers : {"Authorization" : `Bearer ${token}`}}).then((data) => {
 
             let e = data.data.data
 
@@ -25,6 +26,7 @@ export default function Table() {
             setExpense(e)
         })
     }, [])
+
     return (
         <>
             <h3>Expense report</h3>

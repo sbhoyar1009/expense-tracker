@@ -9,7 +9,6 @@ export const IncomeExpenses = () => {
         let totalTrans = data.data.data.map(am=>am.amount)
 
         for(let trans of totalTrans){
-          console.log("Executed")
           if(trans>0){
             income.push(trans)
 

@@ -12,7 +12,8 @@ export const Balance = () => {
     //   return res.data.inr
     // })
 
-    axios.get("http://localhost:8000/expenses").then((data)=>{
+    const token = localStorage.getItem('token')
+    axios.get("http://localhost:8000/expenses",{headers : {"Authorization" : `Bearer ${token}`}}).then((data) => {
       let expense = data.data.data.map(ex=>ex.amount);
       let initialValue = 0
       setBalance(expense.reduce(
