@@ -13,7 +13,6 @@ export const AddTransaction = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(credit)
     let data = {}
     if (credit === false) {
 
@@ -34,7 +33,6 @@ export const AddTransaction = () => {
         "currency" : currency
       }
     }
-    console.log(data)
     axios.post("http://localhost:8000/expenses", { data })
     window.location.reload()
   }
@@ -43,7 +41,7 @@ export const AddTransaction = () => {
   return (
     <div className='container'>
 
-      <a href='/'>   <h3>Go to home</h3> </a>
+      <a href='/home'>   <h3>Go to home</h3> </a>
       <h3> Add new transaction</h3>
       <form onSubmit={onSubmit}>
         <div className="form-control">

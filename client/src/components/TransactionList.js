@@ -4,7 +4,9 @@ import axios from 'axios'
 export const TransactionList = () => {
   const [expenses, setExpenses] = useState([])
   useEffect(() => {
-    axios.get("http://localhost:8000/expenses").then((data) => {
+    const token = localStorage.getItem('token')
+    axios.get("http://localhost:8000/expenses",{headers : {"Authorization" : `Bearer ${token}`}}).then((data) => {
+
       setExpenses(data.data.data.reverse().slice(0,5))
     })
   }, [])
