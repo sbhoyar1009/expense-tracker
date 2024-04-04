@@ -5,7 +5,8 @@ const ExpenseSchema = new mongoose.Schema({
     date: { type: Date,default:Date.now() },
     recipient: { type: String },
     amount: { type: Number },
-    currency : {type : String}
+    currency : {type : String},
+    userID : { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 
 })
 
