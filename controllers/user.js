@@ -49,7 +49,6 @@ exports.verifyUser = async (req, res, next) => {
                 message: "Invalid Credentials"
             });
         }
-        console.log()
         const token = jwt.sign({
             userId: user._id,
             username: user.username
@@ -57,7 +56,7 @@ exports.verifyUser = async (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            data: {username,token}
+            data: {username,token,userid : user._id}
         });
 
     } catch (err) {

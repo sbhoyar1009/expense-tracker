@@ -3,13 +3,14 @@ import axios from 'axios';
 
 export const AddTransaction = () => {
   const [text, setText] = useState('');
-  const [category, setCategory] = useState('');
+
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState()
   let [credit, setCredit] = useState(true);
   const [currency, setCurrency] = useState('INR')
   const categories = ["Food", "Investment", "Groceries", "Study Material", "Clothes", "Travelling", "Subscriptions", "Others and miscellous"]
   const currencies = ["INR", "USD","EUR"]
+  const [category, setCategory] = useState(categories[0]);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -33,6 +34,7 @@ export const AddTransaction = () => {
         "currency" : currency
       }
     }
+    data.userID = localStorage.getItem('userID')
     axios.post("http://localhost:8000/expenses", { data })
     window.location.reload()
   }

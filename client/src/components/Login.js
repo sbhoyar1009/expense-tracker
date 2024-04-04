@@ -14,10 +14,11 @@ export default function Login() {
       username: text,
       password: password
     })
-    console.log(res.status)
       if (res.status === 200) {
         const token = res.data.data.token
+        const userID = res.data.data.userid
         localStorage.setItem('token', token)
+        localStorage.setItem('userID', userID)
         navigate("/home")
       }else if(res.status===201){
         navigate("/signup")

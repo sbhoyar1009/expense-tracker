@@ -3,7 +3,6 @@ const Expense  = require("../models/expense")
 exports.addExpenses = async (req, res, next) => {
 
     try {
-        console.log(req.body.data)
       const transaction = await Expense.create(req.body.data);
         
       return res.status(201).json({
@@ -29,8 +28,9 @@ exports.addExpenses = async (req, res, next) => {
 
   exports.getExpenses = async (req, res, next) => {
     try {
-      const transactions = await Expense.find();
-  
+      const user = req.user
+      const transactions = await Expense.find({userID : user.userId});
+
       return res.status(200).json({
         success: true,
         count: transactions.length,
