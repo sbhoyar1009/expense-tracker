@@ -9,11 +9,25 @@ export const AddTransaction = () => {
   let [credit, setCredit] = useState(true);
   const [currency, setCurrency] = useState('INR')
   const categories = ["Food", "Investment", "Groceries", "Study Material", "Clothes", "Travelling", "Subscriptions", "Others and miscellous"]
-  const currencies = ["INR", "USD","EUR"]
+  const currencies = ["INR", "USD", "EUR"]
   const [category, setCategory] = useState(categories[0]);
 
   const onSubmit = e => {
     e.preventDefault();
+    const file = document.getElementById("formFile").files[0]
+
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    // formData.append('fileName', file.name);
+
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+
     let data = {}
     if (credit === false) {
 
@@ -22,7 +36,7 @@ export const AddTransaction = () => {
         "recipient": text,
         "amount": parseInt(amount) * -1,
         "date": date,
-        "currency" : currency
+        "currency": currency
 
       }
     } else {
@@ -31,11 +45,12 @@ export const AddTransaction = () => {
         "recipient": text,
         "amount": parseInt(amount),
         "date": date,
-        "currency" : currency
+        "currency": currency
       }
     }
     data.userID = localStorage.getItem('userID')
-    axios.post("http://localhost:8000/expenses", { data })
+    formData.append('data',JSON.stringify(data))
+    axios.post("http://localhost:8000/expenses", formData, config)
     window.location.reload()
   }
 
@@ -58,7 +73,7 @@ export const AddTransaction = () => {
             })}
           </select>
         </div>
-  
+
         <div className="form-control amount">
           <label htmlFor="amount"
           >Amount <br />
@@ -66,22 +81,22 @@ export const AddTransaction = () => {
           </label>
           <br />
           <div style={{ "display": "inline-block" }}>
-            <select onChange={(e)=>    setCurrency(e.target.value)}>
+            <select onChange={(e) => setCurrency(e.target.value)}>
               {currencies.map((cat) => {
                 return (<option value={cat}>{cat}</option>)
               })}
             </select>
           </div>
           < div style={{ "display": "inline-block", "margin": "0.5rem", "width": "18.26rem" }}>
-            <input type="number" value={amount} onChange={e=>setAmount(e.target.value)} placeholder="Enter amount..." />
+            <input type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="Enter amount..." />
           </div>
         </div>
         <div className="form-control">
 
-<label htmlFor="date"> Add reciepts if you want
-</label>
-<input type="file"  />
-</div>
+          <label htmlFor="date"> Add reciepts if you want
+          </label>
+          <input type="file" id="formFile" />
+        </div>
         <br />
         <div className="form-control">
 
@@ -89,7 +104,7 @@ export const AddTransaction = () => {
           </label>
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="Enter date..." />
         </div>
-  
+
         <div class="buttons">
 
           <div class="action_btn">

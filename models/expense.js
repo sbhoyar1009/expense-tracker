@@ -6,6 +6,7 @@ const ExpenseSchema = new mongoose.Schema({
     recipient: { type: String },
     amount: { type: Number },
     currency : {type : String},
+    filename : {type : String},
     userID : { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 
 })
